@@ -9,7 +9,7 @@ export default function GesamtseitenContextProvider({ children }) {
   const [sampleText, setSampleText] = useState(
     "Ich bin ein Text der global verfügbar ist :-)"
   );
-  const [localStorageData, setLocalStorageData] = useState();
+  const [localStorageToken, setLocalStorageToken] = useState(null);
 
   return (
     // Global verfügbare Daten hier nochmal eintragen:
@@ -17,8 +17,8 @@ export default function GesamtseitenContextProvider({ children }) {
       value={{
         sampleText,
         setSampleText,
-        localStorageData,
-        setLocalStorageData,
+        localStorageToken,
+        setLocalStorageToken,
       }}
     >
       {children}

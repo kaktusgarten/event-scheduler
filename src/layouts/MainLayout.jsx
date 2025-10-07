@@ -19,7 +19,7 @@ export default function MainLayout() {
         </div>
 
         <div className="bg-black">
-          <div className="container m-auto mb-4">
+          <div className="container m-auto">
             <Footer></Footer>
           </div>
         </div>

@@ -7,7 +7,7 @@ import { GesamtseitenContext } from "../contexts/GesamtseitenContext";
 export default function MainLayout() {
   // REACT Context Daten:
   const { setLocalStorageToken } = use(GesamtseitenContext);
-  // User Daten mit Name und Token im Local Storage inital anlegen:
+  // Token im LocalStorage inital anlegen:
   useEffect(() => {
     const tokenInStore = localStorage.getItem("token");
     if (tokenInStore) {

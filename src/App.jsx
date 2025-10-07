@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import DetailsPage from "./pages/DetailsPage.jsx";
 import UsersPage from "./pages/UsersPage.jsx";
 import NichtGefundenPage from "./pages/NichtGefundenPage.jsx";
+import NewEventPage from "./pages/NewEventPage.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,7 +18,8 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path="/registrieren" element={<RegistryPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/eventdetails" element={<DetailsPage />} />
+        <Route path="/event-details" element={<DetailsPage />} />
+        <Route path="/neues-event" element={<NewEventPage />} />
         <Route path="/benutzeruebersicht" element={<UsersPage />} />
         <Route path="/nicht-gefunden" element={<NichtGefundenPage />} />
       </Route>

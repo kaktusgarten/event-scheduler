@@ -25,6 +25,9 @@ export default function Header() {
             <li>
               <NavLink to="/benutzeruebersicht">Benutzerübersicht</NavLink>
             </li>
+            <li>
+              <NavLink to="/nicht-gefunden">404-Page</NavLink>
+            </li>
           </ul>
         </nav>
       </header>

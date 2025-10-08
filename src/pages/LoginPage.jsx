@@ -102,6 +102,18 @@ const LoginPage = () => {
             </div>
           </form>
         </div>
+        {/* ABMELDEN */}
+        <div className="pt-10">
+          <button
+            className="btn"
+            onClick={() => {
+              localStorage.setItem("token", JSON.stringify(""));
+              setLocalStorageToken("");
+            }}
+          >
+            Abmelden
+          </button>
+        </div>
       </div>
     </>
   );

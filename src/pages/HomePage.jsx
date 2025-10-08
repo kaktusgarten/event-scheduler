@@ -5,12 +5,13 @@ const HomePage = () => {
   // Wichtig für function speicherLoginToken(token):
   const { sampleText, setLocalStorageToken, localStorageToken } =
     use(GesamtseitenContext);
-  // Funktion zum speichern des Login Tokens:
-  function speicherLoginToken(token) {
-    console.log(`Login mit Token: ${token}`);
-    localStorage.setItem("token", JSON.stringify(token));
-    setLocalStorageToken(token);
-  }
+  
+  // Sample Funktion zum speichern des Login Tokens:
+  // function speicherLoginToken(token) {
+  //   console.log(`Login mit Token: ${token}`);
+  //   localStorage.setItem("token", JSON.stringify(token));
+  //   setLocalStorageToken(token);
+  // }
 
   return (
     <>
@@ -22,7 +23,7 @@ const HomePage = () => {
 
           <p>Token: {localStorageToken}</p>
         </div>
-        <button
+        {/* <button
           className="border p-5 btn m-5"
           onClick={() => {
             speicherLoginToken(
@@ -39,7 +40,7 @@ const HomePage = () => {
           }}
         >
           Clear Token
-        </button>
+        </button> */}
       </div>
     </>
   );

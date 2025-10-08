@@ -1,7 +1,9 @@
 import { useActionState, use } from "react";
 import { GesamtseitenContext } from "../contexts/GesamtseitenContext";
 
+// LOGIN PAGE:
 const LoginPage = () => {
+  // const für Globalen Token:
   const { localStorageToken, setLocalStorageToken } = use(GesamtseitenContext);
 
   const [state, formAction] = useActionState(action, {
@@ -25,9 +27,11 @@ const LoginPage = () => {
       const data = await response.json();
       console.log("response: ", data["token"]);
 
+      // Token global speicher:
       const token = data["token"];
-
+      // in LocalStorage
       localStorage.setItem("token", JSON.stringify(token));
+      // in globalen React Context
       setLocalStorageToken(token);
     } else {
       alert("Email is unknown!");

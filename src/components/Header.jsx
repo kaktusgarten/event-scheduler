@@ -1,12 +1,14 @@
+import { use } from "react";
+import { GesamtseitenContext } from "../contexts/GesamtseitenContext";
 import { NavLink } from "react-router";
 
 export default function Header() {
-  const title = "Event-Scheduler";
+  const { localStorageToken } = use(GesamtseitenContext);
 
   return (
     <>
       <header className="p-4 overflow-auto">
-        <h1 className="text-3xl ">{title}</h1>
+        <h1 className="text-3xl ">Event-Scheduler</h1>
         {/* Navigation! */}
         <nav className="my-5">
           <ul className="flex gap-3 flex-wrap">

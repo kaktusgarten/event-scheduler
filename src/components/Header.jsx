@@ -23,19 +23,20 @@ export default function Header() {
         </nav>
 
         <nav className="my-5">
-          <span className="underline">Admin-Navi:</span>
+          <div className="underline text-xs mb-2">Admin-Navi:</div>
           <ul className="flex gap-3 flex-wrap">
             <li>
-              <NavLink to="/neues-event">Neues Event</NavLink>
+              <NavLink to="/neues-event">Neues Event</NavLink> -
             </li>
             <li>
-              <NavLink to="/benutzeruebersicht">Benutzerübersicht</NavLink>
+              <NavLink to="/benutzeruebersicht">Benutzerübersicht</NavLink> -
             </li>
 
             <li>
               <NavLink to="/event-details/1">
                 Event-Details-Seite (Vorschau)
-              </NavLink>
+              </NavLink>{" "}
+              -
             </li>
             <li>
               <NavLink to="/nicht-gefunden">404-Page (Vorschau)</NavLink>

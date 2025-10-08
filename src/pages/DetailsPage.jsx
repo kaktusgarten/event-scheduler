@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 // SLUG - useParams:
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 
 const DetailsPage = () => {
   const [articleData, setArticleData] = useState();
@@ -55,7 +55,16 @@ const DetailsPage = () => {
     );
   } else {
     return (
-      <h2 className="text-3xl p-5">{`Der Eintrag mit der ID: "${slug}" wurde nicht gefunden.`}</h2>
+      <>
+        <div className="p-4">
+          <h2 className="text-3xl mb-9">
+            {`Der Eintrag mit der ID: "${slug}" wurde nicht gefunden.`}
+          </h2>
+          <Link to="/">
+            <button className="btn">Zurück zur Homepage</button>
+          </Link>
+        </div>
+      </>
     );
   }
 };

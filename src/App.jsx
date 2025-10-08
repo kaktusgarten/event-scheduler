@@ -8,9 +8,9 @@ import DetailsPage from "./pages/DetailsPage.jsx";
 import UsersPage from "./pages/UsersPage.jsx";
 import NichtGefundenPage from "./pages/NichtGefundenPage.jsx";
 import NewEventPage from "./pages/NewEventPage.jsx";
+import ProtectedLayout from "./layouts/ProtectedLayout";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <Routes>
@@ -19,8 +19,10 @@ function App() {
         <Route path="/registrieren" element={<RegistryPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/event-details" element={<DetailsPage />} />
-        <Route path="/neues-event" element={<NewEventPage />} />
-        <Route path="/benutzeruebersicht" element={<UsersPage />} />
+        <Route element={<ProtectedLayout />}>
+          <Route path="/neues-event" element={<NewEventPage />} />
+          <Route path="/benutzeruebersicht" element={<UsersPage />} />
+        </Route>
         <Route path="/nicht-gefunden" element={<NichtGefundenPage />} />
       </Route>
     </Routes>

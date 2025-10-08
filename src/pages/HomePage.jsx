@@ -49,14 +49,25 @@ const HomePage = () => {
   return (
     <>
       <div className="border p-5">
-        <h1 className="text-3xl">Events</h1>
+        <h1 className="text-4xl">Events</h1>
         <p className="pb-10">Übersicht der aktuellen Veranstaltungen:</p>
         {events?.map((event) => (
-          <article key={event.id} className="border p-10 bg-black mb-5">
-            <h3 className="text-2xl">{event.title}</h3>
+          <article key={event.id} className="border p-8 bg-black mb-5">
+            <h3 className="text-3xl">{event.title}</h3>
             <p className="pb-2">{event.location}</p>
-            <p className="pb-2">Datum: {event.date}</p>
-            <p className="pb-2">{event.description}</p>
+            <p className="pb-4">
+              Datum:<br></br> {event.date}
+            </p>
+            <p className="pb-4">
+              Beschreibung:<br></br> {event.description}
+            </p>
+            <p className="text-sm">
+              <div>Organizer-ID: {event.organizerId}</div>
+              <div>
+                Geo-Location: ({event.latitude} / {event.longitude})
+              </div>
+              <div>Letzte Aktualisierung: {event.updatedAt}</div>
+            </p>
           </article>
         ))}
       </div>

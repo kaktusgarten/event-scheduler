@@ -17,19 +17,28 @@ export default function Header() {
               <NavLink to="/registrieren">Registrieren</NavLink>
             </li>
             <li>
-              <NavLink to="/login">Login</NavLink>
+              <NavLink to="/login">Login / Logout</NavLink>
             </li>
-            <li>
-              <NavLink to="/event-details/1">Event-Details</NavLink>
-            </li>
+          </ul>
+        </nav>
+
+        <nav className="my-5">
+          <span className="underline">Admin-Navi:</span>
+          <ul className="flex gap-3 flex-wrap">
             <li>
               <NavLink to="/neues-event">Neues Event</NavLink>
             </li>
             <li>
               <NavLink to="/benutzeruebersicht">Benutzerübersicht</NavLink>
             </li>
+
             <li>
-              <NavLink to="/nicht-gefunden">404-Page</NavLink>
+              <NavLink to="/event-details/1">
+                Event-Details-Seite (Vorschau)
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/nicht-gefunden">404-Page (Vorschau)</NavLink>
             </li>
           </ul>
         </nav>

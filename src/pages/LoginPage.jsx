@@ -11,9 +11,8 @@ async function login(email, password) {
   }).then();
   if (response.ok) {
     alert("You are successful logged in");
-    console.log("Alles gut");
     const data = await response.json();
-    console.log("response: ", data["token"]);
+    //    console.log("response: ", data["token"]);
   } else {
     alert("Email is unknown!");
     console.log("Status: ", response.status);
@@ -40,7 +39,7 @@ async function action(previousState, formData) {
   const iPassword = formData.get("inpPassword");
 
   if (Object.keys(formErrors).length === 0) {
-    // Anmelden
+    // Anmelden und token holen
     login(iEMail, iPassword);
     return { errors: null, input: null, reset: true };
   }

@@ -23,7 +23,6 @@ async function register(email, password) {
   }).then();
   if (response.ok) {
     alert("You are successful registered");
-    console.log("Alles gut");
   } else {
     alert("Email always used!");
     console.log("Status: ", response.status);
@@ -42,7 +41,6 @@ async function action(previousState, formData) {
     register(iEMail, iPassword);
     return { errors: null, input: null, reset: true };
   }
-
   return { errors: formErrors, input: null, reset: false };
 }
 

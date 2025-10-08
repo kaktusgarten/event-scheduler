@@ -5,7 +5,7 @@ const NichtGefundenPage = () => {
     <>
       <div className="p-5 grid grid-cols-1 justify-items-center">
         <h1 className="text-3xl mb-10">
-          404- Diese Seite wurde leider nicht gefunden
+          Diese Seite wurde leider nicht gefunden
         </h1>
         <img
           src="/img/404.gif"

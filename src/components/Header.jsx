@@ -29,17 +29,7 @@ export default function Header() {
               <NavLink to="/neues-event">Neues Event</NavLink> -
             </li>
             <li>
-              <NavLink to="/benutzeruebersicht">Benutzerübersicht</NavLink> -
-            </li>
-
-            <li>
-              <NavLink to="/event-details/1">
-                Event-Details-Seite (Vorschau)
-              </NavLink>{" "}
-              -
-            </li>
-            <li>
-              <NavLink to="/nicht-gefunden">404-Page (Vorschau)</NavLink>
+              <NavLink to="/benutzeruebersicht">Benutzerübersicht</NavLink>
             </li>
           </ul>
         </nav>

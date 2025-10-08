@@ -1,5 +1,6 @@
 import { use, useEffect, useState } from "react";
 import { GesamtseitenContext } from "../contexts/GesamtseitenContext";
+import { Link } from "react-router";
 
 const HomePage = () => {
   // Wichtig für function speicherLoginToken(token):
@@ -33,7 +34,6 @@ const HomePage = () => {
         }
 
         const data = await response.json();
-        console.log("Events:", data);
         setEvents(data.results);
 
         return data;
@@ -52,23 +52,25 @@ const HomePage = () => {
         <h1 className="text-4xl">Events</h1>
         <p className="pb-10">Übersicht der aktuellen Veranstaltungen:</p>
         {events?.map((event) => (
-          <article key={event.id} className="border p-8 bg-black mb-5">
-            <h3 className="text-3xl">{event.title}</h3>
-            <p className="pb-2">{event.location}</p>
-            <p className="pb-4">
-              Datum:<br></br> {event.date}
-            </p>
-            <p className="pb-4">
-              Beschreibung:<br></br> {event.description}
-            </p>
-            <p className="text-sm">
-              <div>Organizer-ID: {event.organizerId}</div>
-              <div>
-                Geo-Location: ({event.latitude} / {event.longitude})
+          <Link to={`/event-details/${event.id}`} key={event.id}>
+            <article className="border p-8 bg-black mb-5">
+              <h3 className="text-3xl">{event.title}</h3>
+              <p className="pb-2">{event.location}</p>
+              <p className="pb-4">
+                Datum:<br></br> {event.date}
+              </p>
+              <p className="pb-4">
+                Beschreibung:<br></br> {event.description}
+              </p>
+              <div className="text-sm">
+                <div>Organizer-ID: {event.organizerId}</div>
+                <div>
+                  Geo-Location: ({event.latitude} / {event.longitude})
+                </div>
+                <div>Letzte Aktualisierung: {event.updatedAt}</div>
               </div>
-              <div>Letzte Aktualisierung: {event.updatedAt}</div>
-            </p>
-          </article>
+            </article>
+          </Link>
         ))}
       </div>
     </>

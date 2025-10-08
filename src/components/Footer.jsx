@@ -10,21 +10,6 @@ export default function Footer() {
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
-            <li>
-              <NavLink to="/registrieren">Registrieren</NavLink>
-            </li>
-            <li>
-              <NavLink to="/login">Login</NavLink>
-            </li>
-            <li>
-              <NavLink to="/eventdetails">Event-Details</NavLink>
-            </li>
-            <li>
-              <NavLink to="/benutzeruebersicht">Benutzerübersicht</NavLink>
-            </li>
-            <li>
-              <NavLink to="/nicht-gefunden">404-Page</NavLink>
-            </li>
           </ul>
         </nav>
       </footer>

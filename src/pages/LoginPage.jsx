@@ -121,4 +121,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-export { getTokenFromLocalStorage };

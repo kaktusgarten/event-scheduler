@@ -62,13 +62,6 @@ const HomePage = () => {
               <p className="pb-4">
                 Beschreibung:<br></br> {event.description}
               </p>
-              <div className="text-sm">
-                <div>Organizer-ID: {event.organizerId}</div>
-                <div>
-                  Geo-Location: ({event.latitude} / {event.longitude})
-                </div>
-                <div>Letzte Aktualisierung: {event.updatedAt}</div>
-              </div>
             </article>
           </Link>
         ))}

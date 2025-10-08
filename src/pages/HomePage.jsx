@@ -23,24 +23,7 @@ const HomePage = () => {
 
           <p>Token: {localStorageToken}</p>
         </div>
-        {/* <button
-          className="border p-5 btn m-5"
-          onClick={() => {
-            speicherLoginToken(
-              "ich bin der login token 1232134123123123 bla..."
-            );
-          }}
-        >
-          Sample Token global Speichern
-        </button>
-        <button
-          className="border p-5 btn m-5"
-          onClick={() => {
-            speicherLoginToken(null);
-          }}
-        >
-          Clear Token
-        </button> */}
+      
       </div>
     </>
   );

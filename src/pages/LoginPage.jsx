@@ -109,6 +109,7 @@ const LoginPage = () => {
             onClick={() => {
               localStorage.setItem("token", JSON.stringify(""));
               setLocalStorageToken("");
+              alert("Du hast dich erfolgreich abgemeldet!");
             }}
           >
             Abmelden

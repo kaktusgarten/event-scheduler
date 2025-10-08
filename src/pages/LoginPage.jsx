@@ -1,5 +1,18 @@
 import { useActionState } from "react";
 
+function saveTokenToLocalStorage(token) {
+  console.log("saveTokenToLocalStorage");
+  localStorage.setItem("userToken", token);
+  console.log("Ende saveTokenToLocalStorage");
+}
+
+function getTokenFromLocalStorage() {
+  console.log("getTokenFromLocalStorage");
+  const token = localStorage.getItem("userToken");
+  console.log("Ende getTokenFromLocalStorage");
+  return token;
+}
+
 async function login(email, password) {
   const response = await fetch("http://localhost:3001/api/auth/login", {
     method: "POST",
@@ -13,6 +26,8 @@ async function login(email, password) {
     alert("You are successful logged in");
     const data = await response.json();
     //    console.log("response: ", data["token"]);
+    saveTokenToLocalStorage(data["token"]);
+    console.log("get Token back: ", getTokenFromLocalStorage());
   } else {
     alert("Email is unknown!");
     console.log("Status: ", response.status);

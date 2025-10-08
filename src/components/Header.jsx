@@ -24,7 +24,10 @@ export default function Header() {
           </ul>
         </nav>
 
-        <nav className="my-5">
+        <nav
+          className="my-5"
+          style={{ display: !localStorageToken ? "none" : "block" }}
+        >
           <div className="underline text-xs mb-2">Admin-Navi:</div>
           <ul className="flex gap-3 flex-wrap">
             <li>

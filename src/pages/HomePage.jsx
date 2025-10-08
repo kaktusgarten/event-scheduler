@@ -9,13 +9,6 @@ const HomePage = () => {
 
   const [events, setEvents] = useState();
 
-  // Sample Funktion zum speichern des Login Tokens:
-  // function speicherLoginToken(token) {
-  //   console.log(`Login mit Token: ${token}`);
-  //   localStorage.setItem("token", JSON.stringify(token));
-  //   setLocalStorageToken(token);
-  // }
-
   useEffect(() => {
     async function getAllEvents() {
       try {

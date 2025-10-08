@@ -6,7 +6,6 @@ const DetailsPage = () => {
   const [articleData, setArticleData] = useState();
   // SLUG:
   const { slug } = useParams();
-  console.log("Folgender Slug steht in der URL: " + slug);
 
   useEffect(() => {
     async function getEventDetails() {
@@ -20,16 +19,13 @@ const DetailsPage = () => {
             },
           }
         );
-
         if (!response.ok) {
           throw new Error(`Fehler beim Laden (Status: ${response.status})`);
         }
-
         const data = await response.json();
-        console.log(data);
         setArticleData(data);
-
         return data;
+
       } catch (error) {
         console.error("GET Request fehlgeschlagen:", error);
         throw error;

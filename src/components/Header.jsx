@@ -20,7 +20,10 @@ export default function Header() {
               <NavLink to="/login">Login</NavLink>
             </li>
             <li>
-              <NavLink to="/eventdetails">Event-Details</NavLink>
+              <NavLink to="/event-details">Event-Details</NavLink>
+            </li>
+            <li>
+              <NavLink to="/neues-event">Neues Event</NavLink>
             </li>
             <li>
               <NavLink to="/benutzeruebersicht">Benutzerübersicht</NavLink>

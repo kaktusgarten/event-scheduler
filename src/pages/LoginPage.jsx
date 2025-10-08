@@ -1,59 +1,67 @@
-import { useActionState } from "react";
-
-async function login(email, password) {
-  const response = await fetch("http://localhost:3001/api/auth/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
-  }).then();
-  if (response.ok) {
-    alert("You are successful logged in");
-    console.log("Alles gut");
-    const data = await response.json();
-    console.log("response: ", data["token"]);
-  } else {
-    alert("Email is unknown!");
-    console.log("Status: ", response.status);
-  }
-}
-
-function validateForm({ inpEmail, inpPassword }) {
-  const validationErrors = {};
-
-  if (!inpEmail.trim()) {
-    validationErrors.inpEmail = "EMail ist erforderlich";
-  }
-  if (!inpPassword.trim()) {
-    validationErrors.inpPassword = "Passwort ist erforderlich";
-  }
-  return validationErrors;
-}
-
-async function action(previousState, formData) {
-  const validateDate = Object.fromEntries(formData);
-  const formErrors = validateForm(validateDate);
-
-  const iEMail = formData.get("inpEmail");
-  const iPassword = formData.get("inpPassword");
-
-  if (Object.keys(formErrors).length === 0) {
-    // Anmelden
-    login(iEMail, iPassword);
-    return { errors: null, input: null, reset: true };
-  }
-
-  return { errors: formErrors, input: null, reset: false };
-}
+import { useActionState, use } from "react";
+import { GesamtseitenContext } from "../contexts/GesamtseitenContext";
 
 const LoginPage = () => {
+  const { localStorageToken, setLocalStorageToken } = use(GesamtseitenContext);
+
   const [state, formAction] = useActionState(action, {
     errors: null,
     input: null,
     reset: true,
   });
+
+  async function login(email, password) {
+    const response = await fetch("http://localhost:3001/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    }).then();
+    if (response.ok) {
+      alert("You are successful logged in");
+      console.log("Alles gut");
+      const data = await response.json();
+      console.log("response: ", data["token"]);
+
+      const token = data["token"];
+
+      localStorage.setItem("token", JSON.stringify(token));
+      setLocalStorageToken(token);
+    } else {
+      alert("Email is unknown!");
+      console.log("Status: ", response.status);
+    }
+  }
+
+  function validateForm({ inpEmail, inpPassword }) {
+    const validationErrors = {};
+
+    if (!inpEmail.trim()) {
+      validationErrors.inpEmail = "EMail ist erforderlich";
+    }
+    if (!inpPassword.trim()) {
+      validationErrors.inpPassword = "Passwort ist erforderlich";
+    }
+    return validationErrors;
+  }
+
+  async function action(previousState, formData) {
+    const validateDate = Object.fromEntries(formData);
+    const formErrors = validateForm(validateDate);
+
+    const iEMail = formData.get("inpEmail");
+    const iPassword = formData.get("inpPassword");
+
+    if (Object.keys(formErrors).length === 0) {
+      // Anmelden
+      login(iEMail, iPassword);
+      return { errors: null, input: null, reset: true };
+    }
+
+    return { errors: formErrors, input: null, reset: false };
+  }
 
   return (
     <>

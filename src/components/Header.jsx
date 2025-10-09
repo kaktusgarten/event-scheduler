@@ -11,7 +11,7 @@ export default function Header() {
         <div
           className="p-10 mb-5"
           style={{
-            backgroundImage: 'url("/img/header-image-2.jpg")',
+            backgroundImage: 'url("./img/header-image-2.jpg")',
             backgroundPosition: "center",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",

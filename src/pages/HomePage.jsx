@@ -32,6 +32,9 @@ const HomePage = () => {
         return data;
       } catch (error) {
         console.error("GET Request fehlgeschlagen:", error);
+        alert(
+          "Die API ist nicht erreichbar. Für dieses Demo-Projekt muss die API lokal auf eurem Rechner installiert und ausgeführt werden :-) Link zur API: https://github.com/WebDev-WBSCodingSchool/events-api"
+        );
         throw error;
       }
     }

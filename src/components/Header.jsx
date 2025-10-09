@@ -22,7 +22,7 @@ export default function Header() {
             className="text-3xl mb-2 font-black"
             style={{ textShadow: "1px 1px 2px black" }}
           >
-            Der VeranstalungsPlaner (DVP)
+            Der VeranstaltungsPlaner (DVP)
           </h1>
           <p
             className="mb-6 text-2xl"

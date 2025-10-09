@@ -33,16 +33,56 @@ const DetailsPage = () => {
     getEventDetails();
   }, []);
 
+  let objDescription = {};
+
+  function isJsonString(text) {
+    console.log("** isJsonString ** ");
+    if (typeof text !== "string") {
+      console.log("no string: ", typeof text);
+      return false;
+    }
+    try {
+      var json = JSON.parse(text);
+      console.log("json: ", typeof json);
+      return typeof json === "object";
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function getURLFromDescription(description) {
+    console.log("getURLFromDescription");
+    console.log("description: ", description, "  Type: ", typeof description);
+
+    if (description !== undefined) {
+      if (isJsonString(description)) {
+        console.log("description is JSON ");
+        objDescription = JSON.parse(description);
+      } else {
+        console.log("description no JSON");
+        objDescription["Description"] = description;
+      }
+      console.log("objDescription: ", objDescription);
+    }
+  }
+
+  getURLFromDescription(articleData?.description);
+
   if (articleData && articleData.id == slug) {
     return (
       <div className="border p-5 py-20 flex flex-col items-center bg-black">
         <h1 className="text-5xl pb-5">{articleData?.title}</h1>
+        <img src={objDescription.URL} alt="" className="w-32 h-32" />
         <p className="pb-2 text-center">{articleData?.location}</p>
         <p className="pb-4 text-center">
           Datum:<br></br> {articleData?.date}
         </p>
         <p className="pb-4 text-center">
-          Beschreibung:<br></br> {articleData?.description}
+          {/**
+           *           Beschreibung:<br></br> {articleData?.description}
+           *
+           */}
+          Beschreibung:<br></br> {objDescription["Description"]}
         </p>
         <div className="text-sm text-center">
           <div>Organizer-ID: {articleData?.organizerId}</div>

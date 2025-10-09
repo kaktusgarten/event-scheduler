@@ -69,39 +69,46 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className="border p-5">
-        <h1 className="text-3xl">Login-Page</h1>
-        <div className="flex flex-col mt-3 border w-3xs">
-          <form action={formAction}>
+      <div className="p-5 flex flex-col items-center">
+        <h1 className="text-3xl mb-5">Anmeldung</h1>
+        <p className="mb-5">Bitte melde dich hier an:</p>
+
+        <form action={formAction}>
+          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+            <label className="label">Email</label>
             <input
               type="email"
               name="inpEmail"
               id="inpEmail"
               placeholder="Type your email here"
               className="input input-md"
+              autoComplete="email"
             />
             {state.errors?.inpEmail && (
               <p className="">{state.errors.inpEmail}</p>
             )}
 
+            <label className="label">Password</label>
             <input
               type="password"
               name="inpPassword"
               id="inpPassword"
               placeholder="Type your password here"
               className="input input-md"
+              autoComplete="current-password"
             />
             {state.errors?.inpPassword && (
               <p className="">{state.errors.inpPassword}</p>
             )}
 
-            <div className="flex mt-2 justify-end">
-              <button type="submit" className="btn btn-outline">
+            <div className="flex flex-col mt-2 ">
+              <button type="submit" className="btn btn-neutral mt-4">
                 Submit
               </button>
             </div>
-          </form>
-        </div>
+          </fieldset>
+        </form>
+
         {/* ABMELDEN */}
         <div className="pt-10">
           <button

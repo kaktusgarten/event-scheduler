@@ -7,37 +7,45 @@ export default function Header() {
 
   return (
     <>
-      <header className="p-4 overflow-auto">
-        <h1 className="text-3xl ">Event-Scheduler</h1>
-        {/* Navigation! */}
-        <nav className="my-5">
-          <ul className="flex gap-3 flex-wrap">
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/registrieren">Registrieren</NavLink>
-            </li>
-            <li>
-              <NavLink to="/login">Login / Logout</NavLink>
-            </li>
-          </ul>
-        </nav>
+      <header className="p-4 py-10 overflow-auto">
+        <h1 className="text-3xl mb-8">Event-Scheduler</h1>
+        <div className="flex justify-between items-end">
+          {/* Navigation! */}
+          <nav className="">
+            <ul className="flex gap-3 flex-wrap">
+              <li>
+                <NavLink to="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="/registrieren">Registrieren</NavLink>
+              </li>
+              <li>
+                <NavLink to="/login">Login / Logout</NavLink>
+              </li>
+            </ul>
+          </nav>
 
-        <nav
-          className="my-5"
-          style={{ display: !localStorageToken ? "none" : "block" }}
-        >
-          <div className="underline text-xs mb-2">Admin-Navi:</div>
-          <ul className="flex gap-3 flex-wrap">
-            <li>
-              <NavLink to="/neues-event">Neues Event</NavLink> -
-            </li>
-            <li>
-              <NavLink to="/benutzeruebersicht">Benutzerübersicht</NavLink>
-            </li>
-          </ul>
-        </nav>
+          <nav
+            className=""
+            // style={{ display: !localStorageToken ? "none" : "block" }}
+          >
+            <div className="text-xs mb-2">Admin-Navi:</div>
+            {localStorageToken ? (
+              <ul className="flex gap-3 flex-wrap">
+                <li>
+                  <NavLink to="/neues-event">Neues Event</NavLink> -
+                </li>
+                <li>
+                  <NavLink to="/benutzeruebersicht">Benutzerübersicht</NavLink>
+                </li>
+              </ul>
+            ) : (
+              <>
+                <p>Bitte erst anmelden!</p>
+              </>
+            )}
+          </nav>
+        </div>
       </header>
     </>
   );

@@ -44,7 +44,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="border p-5">
+      <div className="p-5">
         <h1 className="text-4xl">Events</h1>
         <p className="pb-10">Übersicht der aktuellen Veranstaltungen:</p>
         {events?.map((event) => (

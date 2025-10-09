@@ -8,8 +8,30 @@ export default function Header() {
   return (
     <>
       <header className="p-4 py-10 overflow-auto">
-        <h1 className="text-3xl mb-2">Der Veranstalungs-Planer (DVP)</h1>
-        <p className="mb-6">Alle deine Veranstaltungen im Überblick!</p>
+        <div
+          className="p-10 mb-5"
+          style={{
+            backgroundImage: 'url("/img/header-image-2.jpg")',
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundColor: "black",
+          }}
+        >
+          <h1
+            className="text-3xl mb-2 font-black"
+            style={{ textShadow: "1px 1px 2px black" }}
+          >
+            Der Veranstalungs-Planer (DVP)
+          </h1>
+          <p
+            className="mb-6 text-2xl"
+            style={{ textShadow: "1px 1px 2px black" }}
+          >
+            Deine Veranstaltungen im Überblick!
+          </p>
+        </div>
+
         <div className="flex justify-between items-end">
           {/* Navigation! */}
           <nav className="">

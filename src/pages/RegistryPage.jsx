@@ -1,4 +1,5 @@
 import { useActionState } from "react";
+import { Link } from "react-router";
 
 function validateForm({ inpEmail, inpPassword }) {
   const validationErrors = {};
@@ -22,8 +23,7 @@ async function register(email, password) {
     }),
   }).then();
   if (response.ok) {
-    alert("You are successful registered");
-    console.log("Alles gut");
+    document.getElementById("modal_registered").showModal();
   } else {
     alert("Email always used!");
     console.log("Status: ", response.status);
@@ -55,6 +55,29 @@ const RegistryPage = () => {
 
   return (
     <>
+      {/* Open the modal using document.getElementById('modal_registered').showModal() method */}
+      <dialog id="modal_registered" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-bold text-lg">Anmeldung</h3>
+          <p className="py-4">
+            Du hast die erfolgreich registriert. Melde dich jetzt mit deinen
+            Registrierungsdaten im{" "}
+            <Link to="/login" className="underline">
+              Login Bereich
+            </Link>{" "}
+            an!
+          </p>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+
       <div className="p-5 flex flex-col items-center">
         <h1 className="text-3xl mb-5">Registrierung</h1>
         <p className="mb-5">

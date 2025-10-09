@@ -1,5 +1,6 @@
 import { useActionState, use } from "react";
 import { GesamtseitenContext } from "../contexts/GesamtseitenContext";
+import { Link } from "react-router";
 
 // LOGIN PAGE:
 const LoginPage = () => {
@@ -155,6 +156,12 @@ const LoginPage = () => {
                   <button type="submit" className="btn btn-neutral mt-4">
                     Anmelden
                   </button>
+                </div>
+                <div className="mt-6">
+                  <Link to="/registrieren">
+                    Hier kannst Du dich{" "}
+                    <span className="underline">Registrieren</span>!
+                  </Link>
                 </div>
               </fieldset>
             </form>

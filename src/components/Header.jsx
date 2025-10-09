@@ -12,12 +12,9 @@ export default function Header() {
         <div className="flex justify-between items-end">
           {/* Navigation! */}
           <nav className="">
-            <ul className="flex gap-3 flex-wrap">
+            <ul className="flex gap-6 flex-wrap">
               <li>
                 <NavLink to="/">Home</NavLink>
-              </li>
-              <li>
-                <NavLink to="/registrieren">Registrieren</NavLink>
               </li>
               <li>
                 <NavLink to="/login">Login / Logout</NavLink>
@@ -31,9 +28,9 @@ export default function Header() {
           >
             <div className="text-xs mb-2">Admin-Navi:</div>
             {localStorageToken ? (
-              <ul className="flex gap-3 flex-wrap">
+              <ul className="flex gap-6 flex-wrap">
                 <li>
-                  <NavLink to="/neues-event">Neues Event</NavLink> -
+                  <NavLink to="/neues-event">Neues Event</NavLink>
                 </li>
                 <li>
                   <NavLink to="/benutzeruebersicht">Benutzerübersicht</NavLink>

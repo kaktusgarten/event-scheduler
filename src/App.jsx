@@ -23,6 +23,7 @@ function App() {
           <Route path="/benutzeruebersicht" element={<UsersPage />} />
         </Route>
         <Route path="/nicht-gefunden" element={<NichtGefundenPage />} />
+        <Route path="*" element={<NichtGefundenPage />} />
       </Route>
     </Routes>
   );

@@ -68,6 +68,7 @@ const LoginPage = () => {
   return (
     <>
       <div className="p-5 flex flex-col items-center">
+        {/* POPUP 1 - Login */}
         {/* Open the modal using document.getElementById('modal_logout').showModal() method */}
         <dialog id="modal_logout" className="modal">
           <div className="modal-box">
@@ -83,6 +84,7 @@ const LoginPage = () => {
             <button>close</button>
           </form>
         </dialog>
+        {/* POPUP 2 - Logout */}
         {/* Open the modal using document.getElementById('modal_login').showModal() method */}
         <dialog id="modal_login" className="modal">
           <div className="modal-box">
@@ -104,7 +106,7 @@ const LoginPage = () => {
 
         {localStorageToken ? (
           <>
-            <h1 className="text-3xl mb-5">Abmelden</h1>
+            <h1 className="text-3xl mb-5">Abmeldung</h1>
             <p className="mb-5">
               Du bist angemeldet. Hier kannst du dich abmelden:
             </p>
@@ -126,7 +128,7 @@ const LoginPage = () => {
 
             <form action={formAction}>
               <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-                <label className="label">Email</label>
+                <label className="label">E-Mail</label>
                 <input
                   type="email"
                   name="inpEmail"
@@ -139,7 +141,7 @@ const LoginPage = () => {
                   <p className="">{state.errors.inpEmail}</p>
                 )}
 
-                <label className="label">Password</label>
+                <label className="label">Passwort</label>
                 <input
                   type="password"
                   name="inpPassword"

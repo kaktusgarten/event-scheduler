@@ -8,7 +8,8 @@ export default function Header() {
   return (
     <>
       <header className="p-4 py-10 overflow-auto">
-        <h1 className="text-3xl mb-8">Event-Scheduler</h1>
+        <h1 className="text-3xl mb-2">Der Veranstalungs-Planer (DVP)</h1>
+        <p className="mb-6">Alle deine Veranstaltungen im Überblick!</p>
         <div className="flex justify-between items-end">
           {/* Navigation! */}
           <nav className="">

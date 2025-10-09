@@ -55,6 +55,7 @@ const RegistryPage = () => {
 
   return (
     <>
+      {/* POPUP - Registrierung erfolgreich */}
       {/* Open the modal using document.getElementById('modal_registered').showModal() method */}
       <dialog id="modal_registered" className="modal">
         <div className="modal-box">
@@ -63,7 +64,7 @@ const RegistryPage = () => {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">Anmeldung</h3>
+          <h3 className="font-bold text-lg">Registierung erfolgreich!</h3>
           <p className="py-4">
             Du hast die erfolgreich registriert. Melde dich jetzt mit deinen
             Registrierungsdaten im{" "}
@@ -86,7 +87,7 @@ const RegistryPage = () => {
 
         <form action={formAction}>
           <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-            <label className="label">Email</label>
+            <label className="label">E-Mail</label>
             <input
               type="email"
               name="inpEmail"
@@ -99,7 +100,7 @@ const RegistryPage = () => {
               <p className="">{state.errors.inpEmail}</p>
             )}
 
-            <label className="label">Password</label>
+            <label className="label">Passwort</label>
             <input
               type="password"
               name="inpPassword"

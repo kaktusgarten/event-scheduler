@@ -22,11 +22,8 @@ const LoginPage = () => {
       }),
     }).then();
     if (response.ok) {
-      alert("You are successful logged in");
-      console.log("Alles gut");
+      document.getElementById("modal_login").showModal();
       const data = await response.json();
-      console.log("response: ", data["token"]);
-
       // Token global speicher:
       const token = data["token"];
       // in LocalStorage
@@ -34,7 +31,7 @@ const LoginPage = () => {
       // in globalen React Context
       setLocalStorageToken(token);
     } else {
-      alert("Email is unknown!");
+      alert("Unbekannte E-Mail!");
       console.log("Status: ", response.status);
     }
   }
@@ -70,6 +67,40 @@ const LoginPage = () => {
   return (
     <>
       <div className="p-5 flex flex-col items-center">
+        {/* Open the modal using document.getElementById('modal_logout').showModal() method */}
+        <dialog id="modal_logout" className="modal">
+          <div className="modal-box">
+            <form method="dialog">
+              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                ✕
+              </button>
+            </form>
+            <h3 className="font-bold text-lg">Abmeldung</h3>
+            <p className="py-4">Du hast dich erfolgreich abgemeldet!</p>
+          </div>
+          <form method="dialog" className="modal-backdrop">
+            <button>close</button>
+          </form>
+        </dialog>
+        {/* Open the modal using document.getElementById('modal_login').showModal() method */}
+        <dialog id="modal_login" className="modal">
+          <div className="modal-box">
+            <form method="dialog">
+              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                ✕
+              </button>
+            </form>
+            <h3 className="font-bold text-lg">Anmeldung</h3>
+            <p className="py-4">
+              Du hast dich erfolgreich angemeldet! Oben rechts in der Navigation
+              stehen dir jetzt weitere Admin-Einstellung zur Verfügung
+            </p>
+          </div>
+          <form method="dialog" className="modal-backdrop">
+            <button>close</button>
+          </form>
+        </dialog>
+
         {localStorageToken ? (
           <>
             <h1 className="text-3xl mb-5">Abmelden</h1>
@@ -81,7 +112,7 @@ const LoginPage = () => {
               onClick={() => {
                 localStorage.setItem("token", JSON.stringify(""));
                 setLocalStorageToken("");
-                alert("Du hast dich erfolgreich abgemeldet!");
+                document.getElementById("modal_logout").showModal();
               }}
             >
               Abmelden
@@ -122,7 +153,7 @@ const LoginPage = () => {
 
                 <div className="flex flex-col mt-2 ">
                   <button type="submit" className="btn btn-neutral mt-4">
-                    Submit
+                    Anmelden
                   </button>
                 </div>
               </fieldset>

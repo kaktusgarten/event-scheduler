@@ -6,5 +6,8 @@
   text-decoration: underline;
   color: #ff9b00;
 }
+li a {
+  text-decoration: underline;
+}
 
 /* Hier alle weiteren eigenen Styles einfügen */

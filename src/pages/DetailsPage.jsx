@@ -36,14 +36,11 @@ const DetailsPage = () => {
   let objDescription = {};
 
   function isJsonString(text) {
-    console.log("** isJsonString ** ");
     if (typeof text !== "string") {
-      console.log("no string: ", typeof text);
       return false;
     }
     try {
       var json = JSON.parse(text);
-      console.log("json: ", typeof json);
       return typeof json === "object";
     } catch (error) {
       return false;
@@ -51,18 +48,12 @@ const DetailsPage = () => {
   }
 
   function getURLFromDescription(description) {
-    console.log("getURLFromDescription");
-    console.log("description: ", description, "  Type: ", typeof description);
-
     if (description !== undefined) {
       if (isJsonString(description)) {
-        console.log("description is JSON ");
         objDescription = JSON.parse(description);
       } else {
-        console.log("description no JSON");
         objDescription["Description"] = description;
       }
-      console.log("objDescription: ", objDescription);
     }
   }
 

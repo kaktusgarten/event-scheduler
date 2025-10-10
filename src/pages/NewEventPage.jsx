@@ -65,6 +65,7 @@ const NewEventPage = () => {
     const validationErrors = {};
 
     if (!inpTitle.trim()) {
+      console.log("Fehler Title!");
       validationErrors.inpTitle = "Title is required";
     }
 
@@ -100,6 +101,8 @@ const NewEventPage = () => {
     const iEMail = formData.get("inpEmail");
     const iPassword = formData.get("inpPassword");
 
+    console.log("Action!");
+
     if (Object.keys(formErrors).length === 0) {
       // Anmelden
       console.log("create new event!");
@@ -108,7 +111,7 @@ const NewEventPage = () => {
       return { errors: null, input: null, reset: true };
     }
 
-    return { errors: formErrors, input: null, reset: false };
+    return { errors: formErrors, input: validateDate, reset: false };
   }
 
   return (
@@ -140,8 +143,12 @@ const NewEventPage = () => {
                   id="inpTitle"
                   name="inpTitle"
                   className="input"
+                  defaultValue={state.input?.inpTitle}
                 />
               </div>
+              {state.errors?.inpTitle && (
+                <p className="">{state.errors.inpTitle}</p>
+              )}
 
               <div>
                 <label htmlFor="inpDescription" className="input w-26">
@@ -153,8 +160,12 @@ const NewEventPage = () => {
                   id="inpDescription"
                   name="inpDescription"
                   className="input"
+                  defaultValue={state.input?.inpDescription}
                 />
               </div>
+              {state.errors?.inpDescription && (
+                <p className="">{state.errors.inpDescription}</p>
+              )}
               <div>
                 <label htmlFor="inpDate" className="input w-26">
                   Date
@@ -165,8 +176,12 @@ const NewEventPage = () => {
                   id="inpDate"
                   name="inpDate"
                   className="input"
+                  defaultValue={state.input?.inpDate}
                 />
               </div>
+              {state.errors?.inpDate && (
+                <p className="">{state.errors.inpDate}</p>
+              )}
 
               <div>
                 <label htmlFor="inpImageURL" className="input w-26">
@@ -178,6 +193,7 @@ const NewEventPage = () => {
                   id="inpImageURL"
                   name="inpImageURL"
                   className="input"
+                  defaultValue={state.input?.inpImageURL}
                 />
               </div>
 
@@ -191,8 +207,12 @@ const NewEventPage = () => {
                   id="inpLocation"
                   name="inpLocation"
                   className="input"
+                  defaultValue={state.input?.inpLocation}
                 />
               </div>
+              {state.errors?.inpLocation && (
+                <p className="">{state.errors.inpLocation}</p>
+              )}
 
               <div>
                 <label htmlFor="inpLat" className="input w-26">
@@ -204,6 +224,7 @@ const NewEventPage = () => {
                   id="inpLat"
                   name="inpLat"
                   className="input"
+                  defaultValue={state.input?.inpLat || 0}
                 />
               </div>
 
@@ -217,6 +238,7 @@ const NewEventPage = () => {
                   id="inpLon"
                   name="inpLon"
                   className="input"
+                  defaultValue={state.input?.inpLon || 0}
                 />
               </div>
             </div>

@@ -39,6 +39,56 @@ const HomePage = () => {
     getAllEvents();
   }, []);
 
+  let objDescription = {};
+  let eventURL = "";
+  let eventDescription = "";
+
+  function isJsonString(text) {
+    if (typeof text !== "string") {
+      return false;
+    }
+    try {
+      var json = JSON.parse(text);
+      return typeof json === "object";
+    } catch (error) {
+      return false;
+    }
+  }
+
+  // Holt aus der Description die URL und Description wenn vorhanden
+  function getJSONFromDescription(description) {
+    objDescription = [];
+    eventURL = "";
+    eventDescription = "";
+    if (description !== undefined) {
+      if (isJsonString(description)) {
+        objDescription = JSON.parse(description);
+        eventURL = objDescription["URL"];
+        eventDescription = objDescription["Description"];
+      } else {
+        //        objDescription["Description"] = description;
+        eventDescription = description;
+      }
+      console.log("eventDescription: ", eventDescription);
+      console.log("eventURL: ", eventURL);
+    }
+  }
+
+  function hasImgUrl(description) {
+    getJSONFromDescription(description);
+    if (eventURL) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function getImgUrl(description) {
+    getJSONFromDescription(description);
+
+    return eventURL;
+  }
+
   return (
     <>
       <div className="border p-5">
@@ -48,12 +98,15 @@ const HomePage = () => {
           <Link to={`/event-details/${event.id}`} key={event.id}>
             <article className="border p-8 bg-black mb-5">
               <h3 className="text-3xl">{event.title}</h3>
+              {hasImgUrl(event.description) && (
+                <img src={getImgUrl(event.description)} className="w-32 h-32" />
+              )}
               <p className="pb-2">{event.location}</p>
               <p className="pb-4">
                 Datum:<br></br> {event.date}
               </p>
               <p className="pb-4">
-                Beschreibung:<br></br> {event.description}
+                Beschreibung:<br></br> {eventDescription}
               </p>
             </article>
           </Link>

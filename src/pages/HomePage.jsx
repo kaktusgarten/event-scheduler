@@ -99,7 +99,13 @@ const HomePage = () => {
         <p className="pb-10">Übersicht der aktuellen Veranstaltungen:</p>
         {events?.map((event) => (
           <Link to={`/event-details/${event.id}`} key={event.id}>
-            <article className="border p-8 bg-black mb-5">
+            <article
+              className="border border-gray-800 p-8 mb-5 rounded-xl 
+             bg-gradient-to-br from-gray-900/70 to-black/70 backdrop-blur-md 
+             shadow-lg transition-all duration-500 ease-out
+             hover:-translate-y-2 hover:shadow-[0_0_30px_#3b82f6aa] hover:border-cyan-600
+             cursor-pointer"
+            >
               <h3 className="text-3xl">{event.title}</h3>
               {hasImgUrl(event.description) && (
                 <img src={getImgUrl(event.description)} className="w-32 h-32" />

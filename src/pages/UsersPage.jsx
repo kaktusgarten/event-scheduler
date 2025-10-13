@@ -23,19 +23,25 @@ const UsersPage = () => {
 
   return (
     <>
-      <div className="p-5">
+      <div className="py-5">
         <h1 className="text-3xl mb-10">Benutzerübersicht</h1>
         <ul>
           {users?.map((user, index) => (
             <li
               key={user.id}
-              className={`p-3 m-3 ${
+              className={`p-4 m-3 ${
                 index % 2 === 0 ? "bg-[#111c2b]" : "bg-black"
               }`}
             >
               <div className="grid md:grid-cols-[80px_1fr_150px_auto] gap-4">
-                <div>{user.id}</div>
-                <div>{user.email}</div>
+                <div>ID: {user.id}</div>
+                <div>
+                  <p className="mb-2 text-xl">{user.email}</p>
+
+                  <p className="text-xs font-[#e5e5e5] pl-3">
+                    Kontoerstellung: {user.createdAt}
+                  </p>
+                </div>
                 <div>Konto aktiv: {user.isActive ? "Ja" : "Nein"}</div>
                 <div className="grid justify-end">
                   <button

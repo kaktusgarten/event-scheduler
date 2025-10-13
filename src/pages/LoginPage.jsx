@@ -1,5 +1,6 @@
 import { useActionState, use } from "react";
 import { GesamtseitenContext } from "../contexts/GesamtseitenContext";
+import { Link } from "react-router";
 
 // LOGIN PAGE:
 const LoginPage = () => {
@@ -22,11 +23,8 @@ const LoginPage = () => {
       }),
     }).then();
     if (response.ok) {
-      alert("You are successful logged in");
-      console.log("Alles gut");
+      document.getElementById("modal_login").showModal();
       const data = await response.json();
-      console.log("response: ", data["token"]);
-
       // Token global speicher:
       const token = data["token"];
       // in LocalStorage
@@ -34,7 +32,7 @@ const LoginPage = () => {
       // in globalen React Context
       setLocalStorageToken(token);
     } else {
-      alert("Email is unknown!");
+      alert("Unbekannte E-Mail!");
       console.log("Status: ", response.status);
     }
   }
@@ -69,52 +67,108 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className="border p-5">
-        <h1 className="text-3xl">Login-Page</h1>
-        <div className="flex flex-col mt-3 border w-3xs">
-          <form action={formAction}>
-            <input
-              type="email"
-              name="inpEmail"
-              id="inpEmail"
-              placeholder="Type your email here"
-              className="input input-md"
-            />
-            {state.errors?.inpEmail && (
-              <p className="">{state.errors.inpEmail}</p>
-            )}
-
-            <input
-              type="password"
-              name="inpPassword"
-              id="inpPassword"
-              placeholder="Type your password here"
-              className="input input-md"
-            />
-            {state.errors?.inpPassword && (
-              <p className="">{state.errors.inpPassword}</p>
-            )}
-
-            <div className="flex mt-2 justify-end">
-              <button type="submit" className="btn btn-outline">
-                Submit
+      <div className="p-5 flex flex-col items-center">
+        {/* POPUP 1 - Login */}
+        {/* Open the modal using document.getElementById('modal_logout').showModal() method */}
+        <dialog id="modal_logout" className="modal">
+          <div className="modal-box">
+            <form method="dialog">
+              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                ✕
               </button>
-            </div>
+            </form>
+            <h3 className="font-bold text-lg">Abmeldung</h3>
+            <p className="py-4">Du hast dich erfolgreich abgemeldet!</p>
+          </div>
+          <form method="dialog" className="modal-backdrop">
+            <button>close</button>
           </form>
-        </div>
-        {/* ABMELDEN */}
-        <div className="pt-10">
-          <button
-            className="btn"
-            onClick={() => {
-              localStorage.setItem("token", JSON.stringify(""));
-              setLocalStorageToken("");
-              alert("Du hast dich erfolgreich abgemeldet!");
-            }}
-          >
-            Abmelden
-          </button>
-        </div>
+        </dialog>
+        {/* POPUP 2 - Logout */}
+        {/* Open the modal using document.getElementById('modal_login').showModal() method */}
+        <dialog id="modal_login" className="modal">
+          <div className="modal-box">
+            <form method="dialog">
+              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                ✕
+              </button>
+            </form>
+            <h3 className="font-bold text-lg">Anmeldung</h3>
+            <p className="py-4">
+              Du hast dich erfolgreich angemeldet! Oben rechts in der Navigation
+              stehen dir jetzt weitere Admin-Einstellung zur Verfügung
+            </p>
+          </div>
+          <form method="dialog" className="modal-backdrop">
+            <button>close</button>
+          </form>
+        </dialog>
+
+        {localStorageToken ? (
+          <>
+            <h1 className="text-3xl mb-5">Abmeldung</h1>
+            <p className="mb-5">
+              Du bist angemeldet. Hier kannst du dich abmelden:
+            </p>
+            <button
+              className="btn w-[400px] max-w-1/1"
+              onClick={() => {
+                localStorage.setItem("token", JSON.stringify(""));
+                setLocalStorageToken("");
+                document.getElementById("modal_logout").showModal();
+              }}
+            >
+              Abmelden
+            </button>
+          </>
+        ) : (
+          <>
+            <h1 className="text-3xl mb-5">Anmeldung</h1>
+            <p className="mb-5">Bitte melde dich hier an:</p>
+
+            <form action={formAction}>
+              <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                <label className="label">E-Mail</label>
+                <input
+                  type="email"
+                  name="inpEmail"
+                  id="inpEmail"
+                  placeholder="Type your email here"
+                  className="input input-md"
+                  autoComplete="email"
+                />
+                {state.errors?.inpEmail && (
+                  <p className="">{state.errors.inpEmail}</p>
+                )}
+
+                <label className="label">Passwort</label>
+                <input
+                  type="password"
+                  name="inpPassword"
+                  id="inpPassword"
+                  placeholder="Type your password here"
+                  className="input input-md"
+                  autoComplete="current-password"
+                />
+                {state.errors?.inpPassword && (
+                  <p className="">{state.errors.inpPassword}</p>
+                )}
+
+                <div className="flex flex-col mt-2 ">
+                  <button type="submit" className="btn btn-neutral mt-4">
+                    Anmelden
+                  </button>
+                </div>
+                <div className="mt-6">
+                  <Link to="/registrieren">
+                    Hier kannst Du dich{" "}
+                    <span className="underline">Registrieren</span>!
+                  </Link>
+                </div>
+              </fieldset>
+            </form>
+          </>
+        )}
       </div>
     </>
   );

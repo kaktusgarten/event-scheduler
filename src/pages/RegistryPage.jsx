@@ -1,4 +1,5 @@
 import { useActionState } from "react";
+import { Link } from "react-router";
 
 function validateForm({ inpEmail, inpPassword }) {
   const validationErrors = {};
@@ -22,8 +23,7 @@ async function register(email, password) {
     }),
   }).then();
   if (response.ok) {
-    alert("You are successful registered");
-    console.log("Alles gut");
+    document.getElementById("modal_registered").showModal();
   } else {
     alert("Email always used!");
     console.log("Status: ", response.status);
@@ -55,39 +55,71 @@ const RegistryPage = () => {
 
   return (
     <>
-      <div className="border p-5">
-        <h1 className="text-3xl">Registry-Page</h1>
-        <div className="flex flex-col mt-3 border w-3xs">
-          <form action={formAction}>
+      {/* POPUP - Registrierung erfolgreich */}
+      {/* Open the modal using document.getElementById('modal_registered').showModal() method */}
+      <dialog id="modal_registered" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-bold text-lg">Registierung erfolgreich!</h3>
+          <p className="py-4">
+            Du hast die erfolgreich registriert. Melde dich jetzt mit deinen
+            Registrierungsdaten im{" "}
+            <Link to="/login" className="underline">
+              Login Bereich
+            </Link>{" "}
+            an!
+          </p>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+
+      <div className="p-5 flex flex-col items-center">
+        <h1 className="text-3xl mb-5">Registrierung</h1>
+        <p className="mb-5">
+          Um Events zu bearbeiten muss du dich erst registrieren:
+        </p>
+
+        <form action={formAction}>
+          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+            <label className="label">E-Mail</label>
             <input
               type="email"
               name="inpEmail"
               id="inpEmail"
               placeholder="Type your email here"
               className="input input-md"
+              autoComplete="email"
             />
             {state.errors?.inpEmail && (
               <p className="">{state.errors.inpEmail}</p>
             )}
 
+            <label className="label">Passwort</label>
             <input
               type="password"
               name="inpPassword"
               id="inpPassword"
               placeholder="Type your password here"
+              autoComplete="current-password"
               className="input input-md"
             />
             {state.errors?.inpPassword && (
               <p className="">{state.errors.inpPassword}</p>
             )}
 
-            <div className="flex mt-2 justify-end">
-              <button type="submit" className="btn btn-outline">
+            <div className="flex flex-col mt-2 ">
+              <button type="submit" className="btn btn-neutral mt-4">
                 Submit
               </button>
             </div>
-          </form>
-        </div>
+          </fieldset>
+        </form>
       </div>
     </>
   );

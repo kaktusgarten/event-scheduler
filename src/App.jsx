@@ -11,19 +11,19 @@ import NewEventPage from "./pages/NewEventPage.jsx";
 import ProtectedLayout from "./layouts/ProtectedLayout";
 
 function App() {
-
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
         <Route path="/registrieren" element={<RegistryPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/event-details" element={<DetailsPage />} />
+        <Route path="/event-details/:slug" element={<DetailsPage />} />
         <Route element={<ProtectedLayout />}>
           <Route path="/neues-event" element={<NewEventPage />} />
           <Route path="/benutzeruebersicht" element={<UsersPage />} />
         </Route>
         <Route path="/nicht-gefunden" element={<NichtGefundenPage />} />
+        <Route path="*" element={<NichtGefundenPage />} />
       </Route>
     </Routes>
   );

@@ -1,46 +1,143 @@
-import { use } from "react";
+import { use, useEffect, useState } from "react";
 import { GesamtseitenContext } from "../contexts/GesamtseitenContext";
+import { Link } from "react-router";
 
 const HomePage = () => {
   // Wichtig für function speicherLoginToken(token):
   const { sampleText, setLocalStorageToken, localStorageToken } =
     use(GesamtseitenContext);
-  
-  // Sample Funktion zum speichern des Login Tokens:
-  // function speicherLoginToken(token) {
-  //   console.log(`Login mit Token: ${token}`);
-  //   localStorage.setItem("token", JSON.stringify(token));
-  //   setLocalStorageToken(token);
-  // }
+
+  const [events, setEvents] = useState();
+
+  useEffect(() => {
+    async function getAllEvents() {
+      try {
+        const response = await fetch(
+          "http://localhost:3001/api/events?page=1&limit=10",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`Fehler beim Laden (Status: ${response.status})`);
+        }
+
+        const data = await response.json();
+        setEvents(data.results);
+
+        return data;
+      } catch (error) {
+        console.error("GET Request fehlgeschlagen:", error);
+        alert(
+          "Die API ist nicht erreichbar. Für dieses Demo-Projekt muss die API lokal auf eurem Rechner installiert und ausgeführt werden :-) Link zur API: https://github.com/WebDev-WBSCodingSchool/events-api"
+        );
+        throw error;
+      }
+    }
+
+    getAllEvents();
+  }, []);
+
+  let objDescription = {};
+  let eventURL = "";
+  let eventDescription = "";
+
+  function isJsonString(text) {
+    if (typeof text !== "string") {
+      return false;
+    }
+    try {
+      var json = JSON.parse(text);
+      return typeof json === "object";
+    } catch (error) {
+      return false;
+    }
+  }
+
+  // Holt aus der Description die URL und Description wenn vorhanden
+  function getJSONFromDescription(description) {
+    objDescription = [];
+    eventURL = "";
+    eventDescription = "";
+    if (description !== undefined) {
+      if (isJsonString(description)) {
+        objDescription = JSON.parse(description);
+        eventURL = objDescription["URL"];
+        eventDescription = objDescription["Description"];
+      } else {
+        //        objDescription["Description"] = description;
+        eventDescription = description;
+      }
+      console.log("eventDescription: ", eventDescription);
+      console.log("eventURL: ", eventURL);
+    }
+  }
+
+  function hasImgUrl(description) {
+    getJSONFromDescription(description);
+    if (eventURL) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function getImgUrl(description) {
+    getJSONFromDescription(description);
+
+    return eventURL;
+  }
 
   return (
     <>
-      <div className="border p-5">
-        <h1 className="text-3xl">Events</h1>
-        <p className="pb-10">Hier werden unsere Event-Einträge angezeigt:</p>
-        <div className="border p-10 bg-black">
-          <p className="pb-7">Ein Event Eintrag... {sampleText}</p>
-
-          <p>Token: {localStorageToken}</p>
-        </div>
-        {/* <button
-          className="border p-5 btn m-5"
-          onClick={() => {
-            speicherLoginToken(
-              "ich bin der login token 1232134123123123 bla..."
-            );
-          }}
-        >
-          Sample Token global Speichern
-        </button>
-        <button
-          className="border p-5 btn m-5"
-          onClick={() => {
-            speicherLoginToken(null);
-          }}
-        >
-          Clear Token
-        </button> */}
+      <div className="p-5">
+        <h1 className="text-4xl">Events</h1>
+        <p className="pb-10">Übersicht der aktuellen Veranstaltungen:</p>
+        {events?.map((event) => (
+          <Link to={`/event-details/${event.id}`} key={event.id}>
+            <article
+              className="border border-gray-800 p-8 mb-5 rounded-xl 
+             bg-gradient-to-br from-gray-900/70 to-black/70 backdrop-blur-md 
+             shadow-lg transition-all duration-500 ease-out
+             hover:-translate-y-2 hover:shadow-[0_0_30px_#3b82f6aa] hover:border-cyan-600
+             cursor-pointer"
+            >
+              <h3 className="text-3xl mb-5">{event.title}</h3>
+              <div className="flex gap-7 sm:flex-row flex-col">
+                <div
+                  className="sm:w-1/3 w-1/1 h-[100] min-h-[200px]"
+                  style={{
+                    backgroundImage: 'url("./img/header-image-2.jpg")',
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundColor: "black",
+                  }}
+                >
+                  {hasImgUrl(event.description) && (
+                    <img
+                      alt={`${event.title}, Ort: ${event.location}`}
+                      src={getImgUrl(event.description)}
+                      className="object-contain"
+                    />
+                  )}
+                </div>
+                <div className="sm:w-2/3">
+                  <h4 className="italic text-amber-200">Veranstaltungsort:</h4>
+                  <p className="pb-4">{event.location}</p>
+                  <p className="italic text-amber-200">Datum:</p>
+                  <p className="pb-4">{event.date}</p>
+                  <p className="italic text-amber-200">Beschreibung:</p>
+                  <p>{eventDescription}</p>
+                </div>
+              </div>
+            </article>
+          </Link>
+        ))}
       </div>
     </>
   );

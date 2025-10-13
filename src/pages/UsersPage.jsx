@@ -5,10 +5,6 @@ import deleteUser from "../data/DeleteUser";
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
 
-  const deleteUser = async (id) => {
-    alert("Lösche User: " + id);
-  };
-
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -24,7 +20,7 @@ const UsersPage = () => {
   return (
     <>
       <div className="py-5">
-        <h1 className="text-3xl mb-10">Benutzerübersicht</h1>
+        <h1 className="text-3xl mb-10 pl-3">Benutzerübersicht</h1>
         <ul>
           {users?.map((user, index) => (
             <li
@@ -46,8 +42,13 @@ const UsersPage = () => {
                 <div className="grid justify-end">
                   <button
                     className="btn btn-secondary"
-                    onClick={(e) => {
-                      deleteUser(user.id);
+                    onClick={async () => {
+                      const ok = await deleteUser(user.id);
+                      if (ok) {
+                        setUsers((prev) =>
+                          prev.filter((u) => u.id !== user.id)
+                        );
+                      }
                     }}
                   >
                     löschen

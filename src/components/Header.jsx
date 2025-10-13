@@ -37,14 +37,23 @@ export default function Header() {
           <nav className="">
             <ul className="flex gap-6 flex-wrap">
               <li>
-                <NavLink to="/">Home</NavLink>
+                <NavLink
+                  to="/"
+                  className="relative text-white hover:text-white after:block after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-cyan-400 after:via-purple-500 after:to-pink-400 hover:after:w-full after:transition-all after:duration-300"
+                >
+                  Home
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/login">Login / Logout</NavLink>
+                <NavLink
+                  to="/login"
+                  className="relative text-white hover:text-white after:block after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-cyan-400 after:via-purple-500 after:to-pink-400 hover:after:w-full after:transition-all after:duration-300"
+                >
+                  Login / Logout
+                </NavLink>
               </li>
             </ul>
           </nav>
-
           <nav
             className=""
             // style={{ display: !localStorageToken ? "none" : "block" }}
@@ -53,10 +62,20 @@ export default function Header() {
             {localStorageToken ? (
               <ul className="flex gap-6 flex-wrap">
                 <li>
-                  <NavLink to="/neues-event">Neues Event</NavLink>
+                  <NavLink
+                    to="/neues-event"
+                    className="relative text-white hover:text-white after:block after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-cyan-400 after:via-purple-500 after:to-pink-400 hover:after:w-full after:transition-all after:duration-300"
+                  >
+                    Neues Event
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/benutzeruebersicht">Benutzerübersicht</NavLink>
+                  <NavLink
+                    to="/benutzeruebersicht"
+                    className="relative text-white hover:text-white after:block after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-cyan-400 after:via-purple-500 after:to-pink-400 hover:after:w-full after:transition-all after:duration-300"
+                  >
+                    Benutzerübersicht
+                  </NavLink>
                 </li>
               </ul>
             ) : (

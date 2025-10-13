@@ -122,7 +122,7 @@ const HomePage = () => {
                     <img
                       alt={`${event.title}, Ort: ${event.location}`}
                       src={getImgUrl(event.description)}
-                      className="object-contain"
+                      className="object-contain w32 h-32"
                     />
                   )}
                 </div>

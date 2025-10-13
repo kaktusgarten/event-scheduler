@@ -1,43 +1,24 @@
 import { useEffect, useState } from "react";
+import getAllUsers from "../data/GetAllUsers";
+import deleteUser from "../data/DeleteUser";
 
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
 
-  const deleteUser = (id) => {
+  const deleteUser = async (id) => {
     alert("Lösche User: " + id);
   };
 
   useEffect(() => {
-    async function getAllUsers() {
+    const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:3001/api/users", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(
-            `Fehler beim Laden der User (Status: ${response.status})`
-          );
-        }
-
-        const data = await response.json();
-        setUsers(data.results);
-        console.log(data);
-
-        return data;
-      } catch (error) {
-        console.error("GET Request fehlgeschlagen:", error);
-        alert(
-          "Die API ist nicht erreichbar. Für dieses Demo-Projekt muss die API lokal auf eurem Rechner installiert und ausgeführt werden :-) Link zur API: https://github.com/WebDev-WBSCodingSchool/events-api"
-        );
-        throw error;
+        const data = await getAllUsers();
+        setUsers(data);
+      } catch {
+        alert("Die Api ist leider nicht erreichbar:-)");
       }
-    }
-
-    getAllUsers();
+    };
+    fetchUsers();
   }, []);
 
   return (

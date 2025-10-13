@@ -106,17 +106,35 @@ const HomePage = () => {
              hover:-translate-y-2 hover:shadow-[0_0_30px_#3b82f6aa] hover:border-cyan-600
              cursor-pointer"
             >
-              <h3 className="text-3xl">{event.title}</h3>
-              {hasImgUrl(event.description) && (
-                <img src={getImgUrl(event.description)} className="w-32 h-32" />
-              )}
-              <p className="pb-2">{event.location}</p>
-              <p className="pb-4">
-                Datum:<br></br> {event.date}
-              </p>
-              <p className="pb-4">
-                Beschreibung:<br></br> {eventDescription}
-              </p>
+              <h3 className="text-3xl mb-5">{event.title}</h3>
+              <div className="flex gap-7 sm:flex-row flex-col">
+                <div
+                  className="sm:w-1/3 w-1/1 h-[100] min-h-[200px]"
+                  style={{
+                    backgroundImage: 'url("./img/header-image-2.jpg")',
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundColor: "black",
+                  }}
+                >
+                  {hasImgUrl(event.description) && (
+                    <img
+                      alt={`${event.title}, Ort: ${event.location}`}
+                      src={getImgUrl(event.description)}
+                      className="object-contain"
+                    />
+                  )}
+                </div>
+                <div className="sm:w-2/3">
+                  <h4 className="italic text-amber-200">Veranstaltungsort:</h4>
+                  <p className="pb-4">{event.location}</p>
+                  <p className="italic text-amber-200">Datum:</p>
+                  <p className="pb-4">{event.date}</p>
+                  <p className="italic text-amber-200">Beschreibung:</p>
+                  <p>{eventDescription}</p>
+                </div>
+              </div>
             </article>
           </Link>
         ))}

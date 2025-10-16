@@ -1,6 +1,7 @@
 import { use, useEffect, useState } from "react";
 import { GesamtseitenContext } from "../contexts/GesamtseitenContext";
 import { Link } from "react-router";
+import { useNavigate } from "react-router";
 
 const HomePage = () => {
   // Wichtig für function speicherLoginToken(token):
@@ -8,6 +9,7 @@ const HomePage = () => {
     use(GesamtseitenContext);
 
   const [events, setEvents] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getAllEvents() {
@@ -97,43 +99,56 @@ const HomePage = () => {
     }
   }
 
+  const Test = (e) => {
+    e.preventDefault();
+    console.log("Hai Fisch!");
+    navigate("/neues-event");
+  };
+
   return (
     <>
       <div className="p-5">
         <h1 className="text-4xl">Events</h1>
         <p className="pb-10">Übersicht der aktuellen Veranstaltungen:</p>
         {events?.map((event) => (
-          <Link to={`/event-details/${event.id}`} key={event.id}>
-            <article
-              className="border border-gray-800 p-8 mb-5 rounded-xl 
+          <>
+            <Link to={`/event-details/${event.id}`} key={event.id}>
+              <article
+                className="border border-gray-800 p-8 mb-5 rounded-xl 
              bg-gradient-to-br from-gray-900/70 to-black/70 backdrop-blur-md 
              shadow-lg transition-all duration-500 ease-out
              hover:-translate-y-2 hover:shadow-[0_0_30px_#3b82f6aa] hover:border-cyan-600
              cursor-pointer"
-            >
-              <h3 className="text-3xl mb-5">{event.title}</h3>
-              <div className="flex gap-7 sm:flex-row flex-col place-items-start">
-                <div
-                  className="sm:w-1/4 w-1/1  min-h-[200px] aspect-square"
-                  style={{
-                    backgroundImage: `url("${getImgUrl(event.description)}")`,
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                    backgroundColor: "black",
-                  }}
-                ></div>
-                <div className="sm:w-3/4">
-                  <h4 className="italic text-amber-200">Veranstaltungsort:</h4>
-                  <p className="pb-4">{event.location}</p>
-                  <p className="italic text-amber-200">Datum:</p>
-                  <p className="pb-4">{event.date}</p>
-                  <p className="italic text-amber-200">Beschreibung:</p>
-                  <p>{eventDescription}</p>
+              >
+                <h3 className="text-3xl mb-5">{event.title}</h3>
+                <div className="flex gap-7 sm:flex-row flex-col place-items-start">
+                  <div
+                    className="sm:w-1/4 w-1/1  min-h-[200px] aspect-square"
+                    style={{
+                      backgroundImage: `url("${getImgUrl(event.description)}")`,
+                      backgroundPosition: "center",
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
+                      backgroundColor: "black",
+                    }}
+                  ></div>
+                  <div className="sm:w-3/4">
+                    <h4 className="italic text-amber-200">
+                      Veranstaltungsort:
+                    </h4>
+                    <p className="pb-4">{event.location}</p>
+                    <p className="italic text-amber-200">Datum:</p>
+                    <p className="pb-4">{event.date}</p>
+                    <p className="italic text-amber-200">Beschreibung:</p>
+                    <p>{eventDescription}</p>
+                  </div>
                 </div>
-              </div>
-            </article>
-          </Link>
+                <Link to={`/edit-event/${event.id}`}>
+                  <button className="btn">Edit me!</button>
+                </Link>
+              </article>
+            </Link>
+          </>
         ))}
       </div>
     </>
@@ -141,3 +156,15 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+// <form>
+//   <button
+//     className="px-5 rounded-2xl bg-amber-500 mt-2"
+//     type="submit"
+//     onClick={() => {
+//       Test();
+//     }}
+//   >
+//     Edit
+//   </button>
+// </form>

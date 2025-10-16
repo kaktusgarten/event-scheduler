@@ -8,6 +8,7 @@ import DetailsPage from "./pages/DetailsPage.jsx";
 import UsersPage from "./pages/UsersPage.jsx";
 import NichtGefundenPage from "./pages/NichtGefundenPage.jsx";
 import NewEventPage from "./pages/NewEventPage.jsx";
+import EditEventPage from "./pages/EditEventPage.jsx";
 import ProtectedLayout from "./layouts/ProtectedLayout";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/event-details/:slug" element={<DetailsPage />} />
         <Route element={<ProtectedLayout />}>
           <Route path="/neues-event" element={<NewEventPage />} />
+          <Route path="/edit-event/:slug" element={<EditEventPage />} />
           <Route path="/benutzeruebersicht" element={<UsersPage />} />
         </Route>
         <Route path="/nicht-gefunden" element={<NichtGefundenPage />} />

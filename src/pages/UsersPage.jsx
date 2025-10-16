@@ -1,4 +1,4 @@
-import { useEffect, useState, use } from "react";
+import { useEffect, useState, use, useRef } from "react";
 import { GesamtseitenContext } from "../contexts/GesamtseitenContext";
 import getAllUsers from "../data/GetAllUsers";
 import deleteUser from "../data/DeleteUser";
@@ -13,7 +13,8 @@ const UsersPage = () => {
   });
 
   const { localStorageToken, setLocalStorageToken } = use(GesamtseitenContext);
-  const token = "someTopSecret";
+  const token = localStorageToken;
+  const updateUserModal = useRef();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -30,7 +31,6 @@ const UsersPage = () => {
   const EditUser = (id) => {
     // filter ginge nicht, weil filter() immer ein Array zurück gibt. find() nicht.
     const userData = users.find((user) => user.id === id);
-    console.log(userData);
     setCurrentUserData(userData);
     document.getElementById("my_modal_3").showModal();
   };
@@ -45,8 +45,7 @@ const UsersPage = () => {
     const updatedUser = {
       name: formData.get("name"),
       email: formData.get("email"),
-      password: formData.get("password"),
-      isActive: formData.get("active") === "true", // String → Boolean
+      isActive: formData.get("active") === "true", // String zu Boolean
     };
 
     console.log("Updated User:", updatedUser);
@@ -74,13 +73,13 @@ const UsersPage = () => {
       const data = await response.json();
       console.log("Erfolgreich aktualisiert:", data);
 
-      //   // Optional: Liste aktualisieren
-      //   setUsers((prev) =>
-      //     prev.map((user) => (user.id === currentUserId ? data : user))
-      //   );
+      // Liste aktualisieren
+      setUsers((prev) =>
+        prev.map((user) => (user.id === currentUserId ? data : user))
+      );
 
-      //   // Modal schließen
-      //   document.getElementById("my_modal_3").close();
+      // Modal schließen
+      updateUserModal.current.close();
     } catch (error) {
       console.error("PUT Request fehlgeschlagen:", error);
       alert(
@@ -92,7 +91,7 @@ const UsersPage = () => {
   return (
     <>
       {/* MODAL */}
-      <dialog id="my_modal_3" className="modal">
+      <dialog id="my_modal_3" className="modal" ref={updateUserModal}>
         <div className="modal-box">
           <form onSubmit={formAction}>
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  border p-4">
@@ -118,13 +117,6 @@ const UsersPage = () => {
                 placeholder="E-Mail eingeben"
               />
 
-              <label className="label">Passwort</label>
-              <input
-                name="password"
-                type="text"
-                className="input w-[100%] mb-4"
-                placeholder="Password eingeben"
-              />
               <label className="label">Kontoaktivierung</label>
               <select
                 defaultValue={
@@ -139,7 +131,7 @@ const UsersPage = () => {
                 <option value="false">inaktiv</option>
               </select>
 
-              <button type="submit" className="btn btn-neutral mt-4">
+              <button type="submit" className="btn btn-neutral mt-4 ">
                 Speichern
               </button>
             </fieldset>
@@ -165,6 +157,7 @@ const UsersPage = () => {
               <div className="grid md:grid-cols-[80px_1fr_150px_auto] gap-4">
                 <div>ID: {user.id}</div>
                 <div>
+                  <p className="mb-2 text-xl">{user.name}</p>
                   <p className="mb-2 text-xl">{user.email}</p>
 
                   <p className="text-xs font-[#e5e5e5] pl-3">
@@ -175,7 +168,7 @@ const UsersPage = () => {
                 <div className="grid justify-end">
                   {/* BUTTON EDIT */}
                   <button
-                    className="btn btn-primary mb-4"
+                    className="btn btn-primary btn-sm"
                     onClick={() => {
                       setCurrentUserId(user.id);
                       EditUser(user.id);
@@ -185,7 +178,7 @@ const UsersPage = () => {
                   </button>
                   {/* BUTTON DELETE */}
                   <button
-                    className="btn btn-secondary"
+                    className="btn btn-secondary btn-sm"
                     onClick={async () => {
                       const ok = await deleteUser(user.id);
                       if (ok) {

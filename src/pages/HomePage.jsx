@@ -141,11 +141,17 @@ const HomePage = () => {
                     <p className="pb-4">{event.date}</p>
                     <p className="italic text-amber-200">Beschreibung:</p>
                     <p>{eventDescription}</p>
+                    <div className="pt-10">
+                      <Link to={`/edit-event/${event.id}`}>
+                        <button className="btn">
+                          {localStorageToken
+                            ? "Edit me!"
+                            : "Zum Bearbeiten bitte hier anmelden"}
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
-                <Link to={`/edit-event/${event.id}`}>
-                  <button className="btn">Edit me!</button>
-                </Link>
               </article>
             </Link>
           </>

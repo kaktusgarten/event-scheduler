@@ -165,10 +165,10 @@ const UsersPage = () => {
                   </p>
                 </div>
                 <div>Konto aktiv: {user.isActive ? "Ja" : "Nein"}</div>
-                <div className="grid justify-end">
+                <div className="flex flex-col">
                   {/* BUTTON EDIT */}
                   <button
-                    className="btn btn-primary btn-sm"
+                    className="btn btn-primary btn-sm mb-2"
                     onClick={() => {
                       setCurrentUserId(user.id);
                       EditUser(user.id);

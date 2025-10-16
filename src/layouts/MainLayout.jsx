@@ -21,7 +21,7 @@ export default function MainLayout() {
   return (
     <>
       <div className="page flex flex-col min-h-screen">
-        <div className="bg-black">
+        <div className="bg-black sticky top-[-220px] z-10 -translate-y-2 shadow-[0_0_30px_#3b82f6aa] border-cyan-600">
           <div className="container m-auto">
             <Header></Header>
           </div>

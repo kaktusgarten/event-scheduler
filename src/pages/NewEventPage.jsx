@@ -132,116 +132,121 @@ const NewEventPage = () => {
            * id, title, description, date, location, lat, lon, organizerid, created, updated
            */}
           <form action={formAction}>
-            <div className="flex flex-col mt-2 gap-4">
-              <div className="">
-                <label htmlFor="inpTitle" className="input w-26 mr-3">
-                  Title
-                </label>
-                <input
-                  type="text"
-                  placeholder=""
-                  id="inpTitle"
-                  name="inpTitle"
-                  className="input"
-                  defaultValue={state.input?.inpTitle}
-                />
-              </div>
-              {state.errors?.inpTitle && (
-                <p className="">{state.errors.inpTitle}</p>
-              )}
+            <section className="grid grid-cols-2 gap-5">
+              <div className="[ LINKE_SPALTE ] flex flex-col mt-2 gap-4">
+                <div className="">
+                  <label htmlFor="inpTitle" className="w-26 mr-3">
+                    Titel:
+                  </label>
+                  <input
+                    type="text"
+                    placeholder=""
+                    id="inpTitle"
+                    name="inpTitle"
+                    className="input w-[100%] mt-3"
+                    defaultValue={state.input?.inpTitle}
+                  />
+                </div>
+                {state.errors?.inpTitle && (
+                  <p className="">{state.errors.inpTitle}</p>
+                )}
+                <div>
+                  <label htmlFor="inpDate" className="w-26 mr-3">
+                    Datum:
+                  </label>
+                  <input
+                    type="date"
+                    placeholder=""
+                    id="inpDate"
+                    name="inpDate"
+                    className="input w-[100%] mt-3"
+                    defaultValue={state.input?.inpDate}
+                  />
+                </div>
+                {state.errors?.inpDate && (
+                  <p className="">{state.errors.inpDate}</p>
+                )}
 
-              <div>
-                <label htmlFor="inpDescription" className="input w-26 mr-3">
-                  Description
-                </label>
-                <input
-                  type="text"
-                  placeholder=""
-                  id="inpDescription"
-                  name="inpDescription"
-                  className="input"
-                  defaultValue={state.input?.inpDescription}
-                />
-              </div>
-              {state.errors?.inpDescription && (
-                <p className="">{state.errors.inpDescription}</p>
-              )}
-              <div>
-                <label htmlFor="inpDate" className="input w-26 mr-3">
-                  Date
-                </label>
-                <input
-                  type="date"
-                  placeholder=""
-                  id="inpDate"
-                  name="inpDate"
-                  className="input"
-                  defaultValue={state.input?.inpDate}
-                />
-              </div>
-              {state.errors?.inpDate && (
-                <p className="">{state.errors.inpDate}</p>
-              )}
+                <div>
+                  <label htmlFor="inpImageURL" className="w-26 mr-3">
+                    URL des Bildes:
+                  </label>
+                  <input
+                    type="text"
+                    placeholder=""
+                    id="inpImageURL"
+                    name="inpImageURL"
+                    className="input w-[100%] mt-3"
+                    defaultValue={state.input?.inpImageURL}
+                  />
+                </div>
 
-              <div>
-                <label htmlFor="inpImageURL" className="input w-26 mr-3">
-                  URL to Image
-                </label>
-                <input
-                  type="text"
-                  placeholder=""
-                  id="inpImageURL"
-                  name="inpImageURL"
-                  className="input"
-                  defaultValue={state.input?.inpImageURL}
-                />
-              </div>
+                <div>
+                  <label htmlFor="inpLocation" className="w-26 mr-3">
+                    Veranstalungsort:
+                  </label>
+                  <input
+                    type="text"
+                    placeholder=""
+                    id="inpLocation"
+                    name="inpLocation"
+                    className="input w-[100%] mt-3"
+                    defaultValue={state.input?.inpLocation}
+                  />
+                </div>
+                {state.errors?.inpLocation && (
+                  <p className="">{state.errors.inpLocation}</p>
+                )}
 
-              <div>
-                <label htmlFor="inpLocation" className="input w-26 mr-3">
-                  Location
-                </label>
-                <input
-                  type="text"
-                  placeholder=""
-                  id="inpLocation"
-                  name="inpLocation"
-                  className="input"
-                  defaultValue={state.input?.inpLocation}
-                />
-              </div>
-              {state.errors?.inpLocation && (
-                <p className="">{state.errors.inpLocation}</p>
-              )}
+                <div className="grid grid-cols-2 gap-5">
+                  <div>
+                    <label htmlFor="inpLat" className="w-26 mr-3">
+                      Latetude:
+                    </label>
+                    <input
+                      type="text"
+                      placeholder=""
+                      id="inpLat"
+                      name="inpLat"
+                      className="input mt-3"
+                      defaultValue={state.input?.inpLat || 0}
+                    />
+                  </div>
 
-              <div>
-                <label htmlFor="inpLat" className="input w-26 mr-3">
-                  Lat
-                </label>
-                <input
-                  type="text"
-                  placeholder=""
-                  id="inpLat"
-                  name="inpLat"
-                  className="input"
-                  defaultValue={state.input?.inpLat || 0}
-                />
+                  <div>
+                    <label htmlFor="inpLon" className="w-26 mr-3 w-[100%]">
+                      Longitude:
+                    </label>
+                    <input
+                      type="text"
+                      placeholder=""
+                      id="inpLon"
+                      name="inpLon"
+                      className="input mt-3 w-[100%]"
+                      defaultValue={state.input?.inpLon || 0}
+                    />
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <label htmlFor="inpLon" className="input w-26 mr-3">
-                  Lon
-                </label>
-                <input
-                  type="text"
-                  placeholder=""
-                  id="inpLon"
-                  name="inpLon"
-                  className="input"
-                  defaultValue={state.input?.inpLon || 0}
-                />
+              <div className="[ RECHTE_SPALTE ]">
+                <div className="h-[100%]">
+                  <label htmlFor="inpDescription" className="w-26 mr-3">
+                    Beschreibung:
+                  </label>
+                  <textarea
+                    placeholder=""
+                    id="inpDescription"
+                    name="inpDescription"
+                    className="textarea w-[100%] h-[90%] mt-5"
+                    defaultValue={state.input?.inpDescription}
+                  />
+                </div>
+                {state.errors?.inpDescription && (
+                  <p className="">{state.errors.inpDescription}</p>
+                )}
               </div>
-            </div>
+            </section>
 
             <div className="flex justify-end w-110 mt-5">
               <button type="submit" className="btn w-1/1">

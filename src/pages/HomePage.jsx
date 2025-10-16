@@ -88,8 +88,13 @@ const HomePage = () => {
 
   function getImgUrl(description) {
     getJSONFromDescription(description);
-
-    return eventURL;
+    if (eventURL) {
+      console.log("http");
+      return eventURL;
+    } else {
+      console.log("local");
+      return "./img/header-image-2.jpg";
+    }
   }
 
   return (
@@ -107,26 +112,18 @@ const HomePage = () => {
              cursor-pointer"
             >
               <h3 className="text-3xl mb-5">{event.title}</h3>
-              <div className="flex gap-7 sm:flex-row flex-col">
+              <div className="flex gap-7 sm:flex-row flex-col place-items-start">
                 <div
-                  className="sm:w-1/3 w-1/1 h-[100] min-h-[200px]"
+                  className="sm:w-1/4 w-1/1  min-h-[200px] aspect-square"
                   style={{
-                    backgroundImage: 'url("./img/header-image-2.jpg")',
+                    backgroundImage: `url("${getImgUrl(event.description)}")`,
                     backgroundPosition: "center",
                     backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",
                     backgroundColor: "black",
                   }}
-                >
-                  {hasImgUrl(event.description) && (
-                    <img
-                      alt={`${event.title}, Ort: ${event.location}`}
-                      src={getImgUrl(event.description)}
-                      className="object-contain"
-                    />
-                  )}
-                </div>
-                <div className="sm:w-2/3">
+                ></div>
+                <div className="sm:w-3/4">
                   <h4 className="italic text-amber-200">Veranstaltungsort:</h4>
                   <p className="pb-4">{event.location}</p>
                   <p className="italic text-amber-200">Datum:</p>

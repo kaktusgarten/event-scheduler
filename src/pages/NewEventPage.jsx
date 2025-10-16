@@ -116,8 +116,8 @@ const NewEventPage = () => {
 
   return (
     <>
-      <div className="border p-5">
-        <h1 className="text-3xl">Neues Event eintragen - Page</h1>
+      <div className="p-5">
+        <h1 className="text-3xl mb-5">Neues Event eintragen:</h1>
         <div>
           {/**
            * Einzugeben
@@ -132,9 +132,9 @@ const NewEventPage = () => {
            * id, title, description, date, location, lat, lon, organizerid, created, updated
            */}
           <form action={formAction}>
-            <div className="flex flex-col mt-2">
+            <div className="flex flex-col mt-2 gap-4">
               <div className="">
-                <label htmlFor="inpTitle" className="input w-26">
+                <label htmlFor="inpTitle" className="input w-26 mr-3">
                   Title
                 </label>
                 <input
@@ -151,7 +151,7 @@ const NewEventPage = () => {
               )}
 
               <div>
-                <label htmlFor="inpDescription" className="input w-26">
+                <label htmlFor="inpDescription" className="input w-26 mr-3">
                   Description
                 </label>
                 <input
@@ -167,7 +167,7 @@ const NewEventPage = () => {
                 <p className="">{state.errors.inpDescription}</p>
               )}
               <div>
-                <label htmlFor="inpDate" className="input w-26">
+                <label htmlFor="inpDate" className="input w-26 mr-3">
                   Date
                 </label>
                 <input
@@ -184,7 +184,7 @@ const NewEventPage = () => {
               )}
 
               <div>
-                <label htmlFor="inpImageURL" className="input w-26">
+                <label htmlFor="inpImageURL" className="input w-26 mr-3">
                   URL to Image
                 </label>
                 <input
@@ -198,7 +198,7 @@ const NewEventPage = () => {
               </div>
 
               <div>
-                <label htmlFor="inpLocation" className="input w-26">
+                <label htmlFor="inpLocation" className="input w-26 mr-3">
                   Location
                 </label>
                 <input
@@ -215,7 +215,7 @@ const NewEventPage = () => {
               )}
 
               <div>
-                <label htmlFor="inpLat" className="input w-26">
+                <label htmlFor="inpLat" className="input w-26 mr-3">
                   Lat
                 </label>
                 <input
@@ -229,7 +229,7 @@ const NewEventPage = () => {
               </div>
 
               <div>
-                <label htmlFor="inpLon" className="input w-26">
+                <label htmlFor="inpLon" className="input w-26 mr-3">
                   Lon
                 </label>
                 <input
@@ -243,9 +243,9 @@ const NewEventPage = () => {
               </div>
             </div>
 
-            <div className="flex justify-end w-106 ">
-              <button type="submit" className="btn">
-                Submit
+            <div className="flex justify-end w-110 mt-5">
+              <button type="submit" className="btn w-1/1">
+                Event eintragen
               </button>
             </div>
           </form>

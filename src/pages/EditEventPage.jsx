@@ -157,6 +157,32 @@ const EditEventPage = () => {
     return testdatum.toISOString().substr(0, 10);
   }
 
+  let objDescription = {};
+
+  function isJsonString(text) {
+    if (typeof text !== "string") {
+      return false;
+    }
+    try {
+      var json = JSON.parse(text);
+      return typeof json === "object";
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function getURLFromDescription(description) {
+    if (description !== undefined) {
+      if (isJsonString(description)) {
+        objDescription = JSON.parse(description);
+      } else {
+        objDescription["Description"] = description;
+      }
+    }
+  }
+
+  getURLFromDescription(articleData?.description);
+
   return (
     <>
       <div className="p-5">
@@ -208,7 +234,7 @@ const EditEventPage = () => {
                   defaultValue={
                     state.input
                       ? state.input?.inpDescription
-                      : articleData?.description
+                      : objDescription["Description"]
                   }
                 />
               </div>
@@ -244,7 +270,11 @@ const EditEventPage = () => {
                   id="inpImageURL"
                   name="inpImageURL"
                   className="input"
-                  defaultValue={state.input?.inpImageURL}
+                  defaultValue={
+                    state.input
+                      ? state.input?.inpImageURL
+                      : objDescription["URL"]
+                  }
                 />
               </div>
 
